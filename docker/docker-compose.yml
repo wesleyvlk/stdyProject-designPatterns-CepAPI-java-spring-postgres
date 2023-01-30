@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  spring-postgresql:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./data/postgresql:/var/lib/postgresql/data
+  spring-pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: test@example.com
+      PGADMIN_DEFAULT_PASSWORD: test123
+    ports:
+      - "5050:80"
+    depends_on:
+      - spring-postgresql
+  # spring-app:
+  #   image: stdyproject-cep_api-spring
+  #   ports:
+  #     - 8080:8080
