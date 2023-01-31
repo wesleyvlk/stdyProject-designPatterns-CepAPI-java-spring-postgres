@@ -1,3 +1,5 @@
+# command: docker-compose up -d --force-recreate
+
 version: "3"
 
 services:
@@ -11,6 +13,7 @@ services:
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./data/postgresql:/var/lib/postgresql/data
+
   spring-pgadmin:
     image: dpage/pgadmin4
     environment:
@@ -20,7 +23,3 @@ services:
       - "5050:80"
     depends_on:
       - spring-postgresql
-  # spring-app:
-  #   image: stdyproject-cep_api-spring
-  #   ports:
-  #     - 8080:8080

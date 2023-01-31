@@ -74,11 +74,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     private void saveCustomerWithZipCode(Customer customer) {
         String cep = customer.getAddress().getCep();
-        Address address = addressRepository.findById(cep).orElseGet(() -> {
-            Address newAddress = viaCepService.consultZipCode(cep);
-            addressRepository.save(newAddress);
-            return newAddress;
-        });
+        Address address = addressRepository.findById(cep)
+                .orElseGet(() -> {
+                    Address newAddress = viaCepService
+                            .consultZipCode(cep);
+                    addressRepository.save(newAddress);
+                    return newAddress;
+                });
         customer.setAddress(address);
         customerRepository.save(customer);
     }

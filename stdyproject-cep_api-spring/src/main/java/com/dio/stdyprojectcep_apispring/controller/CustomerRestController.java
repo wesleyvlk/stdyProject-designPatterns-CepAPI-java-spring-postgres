@@ -22,37 +22,38 @@ import com.dio.stdyprojectcep_apispring.service.CustomerService;
  * @author falvojr
  */
 @RestController
-@RequestMapping("customers")
+@RequestMapping("/customers")
 public class CustomerRestController {
 
     @Autowired
     private CustomerService customerService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<Iterable<Customer>> findAll() {
         return ResponseEntity.ok(customerService.findAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<Customer> findById(@PathVariable Long id) {
         return ResponseEntity.ok(customerService.findById(id));
     }
 
-    @PostMapping
+    @PostMapping("")
     public ResponseEntity<Customer> insert(@RequestBody Customer customer) {
         customerService.insert(customer);
         return ResponseEntity.ok(customer);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<Customer> update(@PathVariable Long id, @RequestBody Customer customer) {
         customerService.update(id, customer);
         return ResponseEntity.ok(customer);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         customerService.delete(id);
         return ResponseEntity.ok().build();
     }
+
 }

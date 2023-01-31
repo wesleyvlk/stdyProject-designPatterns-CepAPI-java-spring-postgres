@@ -16,7 +16,7 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name = "ViaCep")
+@Table(name = "via_cep")
 public class Address {
 
     @Id
